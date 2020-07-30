@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Bienvenido a App Shop')
+
 @section('body-class', 'landing-page')
 
 @section('content')
@@ -7,11 +9,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1 class="title">Write the best title for your page.</h1>
-                <h4>Every landing page needs a small description after the big bold title, that's why we added this text here. Add here all the information that can make you or your product create the first impression.</h4>
+                <h1 class="title">Bienvenido a APP SHOP</h1>
+                <h4>Pedidos en Linea.</h4>
                 <br />
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-danger btn-raised btn-lg">
-                    <i class="fa fa-play"></i> Watch video
+                    <i class="fa fa-play"></i> ¿Como Funciona?
                 </a>
             </div>
         </div>
@@ -35,8 +37,8 @@
                             <div class="icon icon-primary">
                                 <i class="material-icons">chat</i>
                             </div>
-                            <h4 class="info-title">First Feature</h4>
-                            <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
+                            <h4 class="info-title">Atendemos tus dudas</h4>
+                            <p>Atendemos rápidamente cualquier consulta que tengas vía chat. No estás sólo, siempre estamos atentos a tus inquietudes.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -44,8 +46,8 @@
                             <div class="icon icon-success">
                                 <i class="material-icons">verified_user</i>
                             </div>
-                            <h4 class="info-title">Second Feature</h4>
-                            <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
+                            <h4 class="info-title">Pago Seguro</h4>
+                            <p>Todo pedido que realices será confirmado a través de una llamada. Si no confías en los pagos en lìnea, puedes pagar contra entrega el valor acordado.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -53,8 +55,8 @@
                             <div class="icon icon-danger">
                                 <i class="material-icons">fingerprint</i>
                             </div>
-                            <h4 class="info-title">Third Feature</h4>
-                            <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
+                            <h4 class="info-title">Información Privada</h4>
+                            <p>Los pedidos que realices sólo los conocerás tú a través de tu pnale de usuario. Nadie más tiene acceso a esta información.</p>
                         </div>
                     </div>
                 </div>
@@ -69,9 +71,9 @@
                     @foreach($products as $product) 
                     <div class="col-md-4">
                         <div class="team-player">
-                            <img src="../assets/img/avatar.jpg" alt="Thumbnail Image" class="img-raised img-circle">
+                            <img src="{{ $product->images->first()->image }}" alt="Thumbnail Image" class="img-raised img-circle">
                             <h4 class="title">{{ $product->name }} <br />
-                                <small class="text-muted">Model</small>
+                                <small class="text-muted">{{ $product->category->name }}</small>
                             </h4>
                             <p class="description">{{ $product->descripcion }} </p>
                             <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-twitter"></i></a>

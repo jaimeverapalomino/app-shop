@@ -25,3 +25,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+	Route::get('/products', 'ProductController@index'); //retorna listado de productos
+	Route::get('/products/create', 'ProductController@create'); //retorna formulario registro
+	Route::post('/products', 'ProductController@store'); //registrar producto en DB
+	Route::get('/products/{id}/edit', 'ProductController@edit'); //retorna formulario edición
+	Route::post('/products/{id}/edit', 'ProductController@update'); //actualizar producto de DB
+
+	//Route::post('/admin/products/{id}/delete', 'ProductController@destroy'); //eliminar producto de DB
+	Route::delete('/products/{id}', 'ProductController@destroy'); //eliminar producto de DB
+});
+
