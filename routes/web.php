@@ -24,21 +24,21 @@ Route::get('/', 'TestController@welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products/{id}', 'ProductController@show');
 
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-	Route::get('/products', 'ProductController@index'); //retorna listado de productos
-	Route::get('/products/create', 'ProductController@create'); //retorna formulario registro
-	Route::post('/products', 'ProductController@store'); //registrar producto en DB
-	Route::get('/products/{id}/edit', 'ProductController@edit'); //retorna formulario edición
-	Route::post('/products/{id}/edit', 'ProductController@update'); //actualizar producto de DB
-
+	Route::get('/products', 'Admin\ProductController@index'); //retorna listado de productos
+	Route::get('/products/create', 'Admin\ProductController@create'); //retorna formulario registro
+	Route::post('/products', 'Admin\ProductController@store'); //registrar producto en DB
+	Route::get('/products/{id}/edit', 'Admin\ProductController@edit'); //retorna formulario edición
+	Route::post('/products/{id}/edit', 'Admin\ProductController@update'); //actualizar producto de DB
 	//Route::post('/admin/products/{id}/delete', 'ProductController@destroy'); //eliminar producto de DB
-	Route::delete('/products/{id}', 'ProductController@destroy'); //eliminar producto de DB
+	Route::delete('/products/{id}', 'Admin\ProductController@destroy'); //eliminar producto de DB
 
-	Route::get('/products/{id}/images', 'ImageController@index'); //listado imagenes
-	Route::post('/products/{id}/images', 'ImageController@store'); //subir imagenes
-	Route::delete('/products/{id}/images', 'ImageController@destroy'); //eliminar imagenes
-	Route::get('/products/{id}/images/select/{image}', 'ImageController@select'); //destacar imagen
+	Route::get('/products/{id}/images', 'Admin\ImageController@index'); //listado imagenes
+	Route::post('/products/{id}/images', 'Admin\ImageController@store'); //subir imagenes
+	Route::delete('/products/{id}/images', 'Admin\ImageController@destroy'); //eliminar imagenes
+	Route::get('/products/{id}/images/select/{image}', 'Admin\ImageController@select'); //destacar imagen
 });
 
