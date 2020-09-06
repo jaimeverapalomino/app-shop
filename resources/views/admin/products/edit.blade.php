@@ -41,15 +41,32 @@
                     </div>
                 </div> 
 
-                <div class="form-group label-floating">
-                    <label class="control-label">Descripción corta  </label>
-                    <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion', $product->descripcion) }}">
+                <div class="=row">
+                    <div class="col-sm-12">
+                       <div class="form-group label-floating">
+                            <label class="control-label">Descripción corta  </label>
+                            <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion', $product->descripcion) }}">
+                        </div> 
+                    </div> 
                 </div> 
 
-                <textarea class="form-control" placeholder="Descripción extensa del producto" name="long_descripcion" rows="5">{{ old('long_descripcion', $product->long_descripcion) }}</textarea>
+                <div class="=row">
+                    <div class="col-sm-12">                    
+                        <div class="form-group label-floating">
+                            <label class="control-label">Precio ddetallada del producto</label>
+                            <textarea class="form-control" placeholder="Descripción extensa del producto" name="long_descripcion" rows="5">{{ old('long_descripcion', $product->long_descripcion) }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="=row">
+                    <div class="col-sm-6">                    
+                        <div class="form-group label-floating">
+                            <button class="btn btn-primary">Guardar cambios</button>
+                            <a class="btn btn-default" href=" {{ url('/admin/products') }}">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
 
-                <button class="btn btn-primary">Guardar cambios</button>
-                <a class="btn btn-default" href=" {{ url('/admin/products') }}">Cancelar</a>
             </form>
         </div>
     </div>
