@@ -109,7 +109,7 @@
                                 <a href="{{ url('/products/'.$product->id) }}">{{ $product->name }}</a>
 
                                 <br/>
-                                <small class="text-muted">{{ $product->category->name }}</small>
+                                <small class="text-muted">{{ $product->category_name }}</small>
                             </h4>
                             <p class="description">{{ $product->descripcion }} </p>
                         </div>

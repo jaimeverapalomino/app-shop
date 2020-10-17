@@ -9,6 +9,7 @@
 
 </div>
 
+
 <div class="main main-raised">
     <div class="container">
         <div class="section">
@@ -25,30 +26,51 @@
 
                 <form method="post" action="{{ url('/admin/products') }}">
                     @csrf
-                    <div class="col-sm-6">
-                        <div class="form-group label-floating">
-                            <label class="control-label">Nombre del producto</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                    <div class="row">                    
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Nombre del producto</label>
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            </div>
                         </div>
-                  </div>
 
-                    <div class="col-sm-6">
-                        <div class="form-group label-floating">
-                            <label class="control-label">Precio del producto</label>
-                            <input type="number" class="form-control" name="price" value="{{ old('price') }}">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Precio del producto</label>
+                                <input type="number" class="form-control" name="price" value="{{ old('price') }}">
+                            </div>
                         </div>
                     </div>
 
-                        <div class="form-group label-floating">
-                            <label class="control-label">Descripción corta</label>
-                            <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion') }}">
-                        </div>    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Descripción corta</label>
+                                <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion') }}">
+                            </div>
+                        </div>
 
-                        <textarea class="form-control" placeholder="Descripción extensa del producto" name="long_descripcion" rows="5" >{{ old('long_descripcion') }}</textarea>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label ">Categoría del producto</label>
+                                <select class="form-control" name="category_id">
+                                    <option value="0">General</option>
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>   
+                    </div>
 
-                        <button class="btn btn-primary">Registrar producto</button>
-                    
-
+                    <div class="row">
+                        <div class="col-sm-6">                        
+                            <div class="form-group label-floating">                        
+                                <textarea class="form-control" placeholder="Descripción extensa del producto" name="long_descripcion" rows="5" >{{ old('long_descripcion') }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Registrar producto</button>
                 </form>
         </div>
     </div>

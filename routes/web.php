@@ -31,6 +31,15 @@ Route::delete('/cart', 'CartDetailController@destroy');
 
 Route::post('/order', 'CartController@update');
 
+Route::get('/db-test', function() 
+{
+   if(DB::connection()->getDatabaseName())
+   {
+      echo "connected sucessfully to database ".DB::connection()->getDatabaseName();
+   }
+});
+
+
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 	Route::get('/products', 'Admin\ProductController@index'); //retorna listado de productos
 	Route::get('/products/create', 'Admin\ProductController@create'); //retorna formulario registro
@@ -44,5 +53,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 	Route::post('/products/{id}/images', 'Admin\ImageController@store'); //subir imagenes
 	Route::delete('/products/{id}/images', 'Admin\ImageController@destroy'); //eliminar imagenes
 	Route::get('/products/{id}/images/select/{image}', 'Admin\ImageController@select'); //destacar imagen
+
+	Route::get('/categories', 'Admin\CategoryController@index'); //retorna listado de productos
+	Route::get('/categories/create', 'Admin\CategoryController@create'); //retorna formulario registro
+	Route::post('/categories', 'Admin\CategoryController@store'); //registrar producto en DB
+	Route::get('/categories/{category}/edit', 'Admin\CategoryController@edit'); //retorna formulario edición
+	Route::post('/categories/{category}/edit', 'Admin\CategoryController@update'); //actualizar producto de DB
+	Route::delete('/categories/{category}', 'Admin\CategoryController@destroy'); //eliminar producto de DB
 });
 

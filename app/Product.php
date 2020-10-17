@@ -31,4 +31,12 @@ class Product extends Model
 
         return '/images/products/default.png';
     }
+
+    public function getCategoryNameçAttribute()
+    {
+        if($this->category)
+            return($this->category->name);
+        
+        return 'General';
+    }
 }
