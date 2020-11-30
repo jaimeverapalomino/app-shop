@@ -36,13 +36,16 @@ class ProductController extends Controller
         'descripcion.max' => 'La categoría del produto debe contener como 200 caracteres.',
         'price.required' => 'Es necesario ingresar un precio para el producto.',
         'price.numeric' => 'Ingrese un precio válido.',
-        'price.min' => 'El precio del producto debe ser mayor a cero.'
+        'price.min' => 'El precio del producto debe ser mayor a cero.',
+        'category_id.required' => 'Es necesario seleccionar una categoría para el producto.'
       ];  
 
       $rules = [
         'name' => 'required|min:2',
         'descripcion' => 'required|max:200',
-        'price' => 'required|numeric|min:0'
+        'price' => 'required|numeric|min:0',
+        'category_id' => 'required'
+
       ];
 
       $this->validate($request, $rules, $messages);

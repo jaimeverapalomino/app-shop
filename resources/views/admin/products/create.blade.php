@@ -52,25 +52,26 @@
 
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label ">Categoría del producto</label>
+                                <label class="control-label">Categoría del Producto</label>
                                 <select class="form-control" name="category_id">
-                                    <option value="0">General</option>
+                                    <option value=""></option>
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>   
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-6">                        
-                            <div class="form-group label-floating">                        
+                        <div class="col-sm-12">
+                            <div class="form-group label-floating">
                                 <textarea class="form-control" placeholder="Descripción extensa del producto" name="long_descripcion" rows="5" >{{ old('long_descripcion') }}</textarea>
                             </div>
                         </div>
                     </div>
                     <button class="btn btn-primary">Registrar producto</button>
+                    <a class="btn btn-default" href=" {{ url('/admin/products') }}">Cancelar</a>
                 </form>
         </div>
     </div>

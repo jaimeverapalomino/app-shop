@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de productos')
+@section('title', 'Listado de Categorías')
 
 @section('body-class', 'product-page')
 
@@ -40,9 +40,6 @@
 										</a>
 										<a href="{{ url('/admin/categories/'.$category->id.'/edit') }}" type="button" rel="tooltip" title="Editar categoría" class="btn btn-success btn-simple btn-xs">
 											<i class="fa fa-edit"></i>
-										</a>
-										<a href="{{ url('/admin/categories/'.$category->id.'/images') }}" type="button" rel="tooltip" title="Imágenes el categoría" class="btn btn-warning btn-simple btn-xs">
-											<i class="fa fa-image"></i>
 										</a>
 										<button type="submit" rel="tooltip" title="Eliminar categoría" class="btn btn-danger btn-simple btn-xs">
 										<i class="fa fa-times"></i>

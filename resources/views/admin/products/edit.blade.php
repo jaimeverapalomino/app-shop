@@ -41,43 +41,40 @@
                     </div>
                 </div> 
 
-                <div class="=row">
-                    <div class="col-sm-12">
-                       <div class="form-group label-floating">
-                            <label class="control-label">Descripción corta  </label>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Descripción corta</label>
                             <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion', $product->descripcion) }}">
-                        </div> 
-                    </div> 
-                </div> 
+                        </div>
+                    </div>
 
-                <div class="form-group label-floating">
-                    <label class="control-label ">Categoría del producto</label>
-                        <select class="form-control" name="category_id">
-                            <option value="0">General</option>
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" @if($category->id == old('category_id', $product->category_id   )) selected @endif>
-                                {{ $category->name }}
-                            </option>
-                            @endforeach
-                        </select>
+                    <div class="col-sm-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Categoría del Producto</label>
+                            <select class="form-control" name="category_id">
+                                @foreach ($categories as $category)
+                                    @if($category->id == old('category_id', $product->category_id))
+                                        <option value="{{ $category->id }}" selected> {{ $category->name }} </option>
+                                    @else
+                                        <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="=row">
                     <div class="col-sm-12">                    
                         <div class="form-group label-floating">
-                            <label class="control-label">Precio ddetallada del producto</label>
                             <textarea class="form-control" placeholder="Descripción extensa del producto" name="long_descripcion" rows="5">{{ old('long_descripcion', $product->long_descripcion) }}</textarea>
                         </div>
                     </div>
                 </div>
-                <div class="=row">
-                    <div class="col-sm-6">                    
-                        <div class="form-group label-floating">
-                            <button class="btn btn-primary">Guardar cambios</button>
-                            <a class="btn btn-default" href=" {{ url('/admin/products') }}">Cancelar</a>
-                        </div>
-                    </div>
-                </div>
+
+                <button class="btn btn-primary">Guardar cambios</button>
+                <a class="btn btn-default" href=" {{ url('/admin/products') }}">Cancelar</a>
 
             </form>
         </div>

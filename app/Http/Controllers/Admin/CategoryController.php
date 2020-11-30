@@ -42,7 +42,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
       $category->delete();
-        return redirect('admin/categories');
+      return redirect('admin/categories');
     }
     
 }
