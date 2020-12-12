@@ -37,6 +37,6 @@ class Category extends Model
     public function getRandomImageUrlAttribute()
     {
         $RandomProduct = $this->products()->inRandomOrder()->first();
-        return $RandomProduct->random_image_url;
+        return $RandomProduct->featured_image_url;
     }
 }

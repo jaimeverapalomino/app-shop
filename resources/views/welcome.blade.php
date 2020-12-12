@@ -97,15 +97,21 @@
 
         <div class="section text-center">
             <h2 class="title">Categorías Disponibles</h2>
+                <form>
+                    <input type="text" placeholder="Buscar producto" class="form-control">
+                    <button class="btn btn-primary btn-just-icon" type="submit">
+                        <i class="material-icons">search</i>
+                        
+                    </button>
 
+                </form>
             <div class="team">
                 <div class="row">
                     @foreach($categories as $category) 
                     <div class="col-md-4">
                         <div class="team-player">
-                            <img src="{{ $category->featured_image_url }}" alt="Imagen representativa de la categoría {{ $category->name }}" class="img-raised rounded">
+                            <img src="{{ $category->random_image_url }}" alt="Imagen representativa de la categoría {{ $category->name }}" class="img-raised rounded">
                             <h4 class="title">
-
                                 <a href="{{ url('/categories/'.$category->id) }}">{{ $category->name }}</a>
                             </h4>
                             <p class="description">{{ $category->descripcion }} </p>
