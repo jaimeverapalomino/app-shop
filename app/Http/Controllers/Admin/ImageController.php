@@ -26,13 +26,12 @@ class ImageController extends Controller
       $filename = uniqid() . $file->getClientOriginalName();
       $moved = $file->move($path, $filename);
 
-      if ($moved)
-      { 
+      if ($moved){ 
         $productImage = new ProductImage();
         $productImage->image = $filename;
         $productImage->product_id = $id;
         $productImage->save();
-    }
+      }
 
       return back();
     }

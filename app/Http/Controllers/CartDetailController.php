@@ -7,7 +7,13 @@ use App\CartDetail;
 
 class CartDetailController extends Controller
 {
-    public function store(Request $request)
+	public function __construct()
+	{
+		$this->middleware('auth');
+
+	}
+	
+	public function store(Request $request)
     {
     	$cartDetail = new CartDetail();
     	$cartDetail->cart_id = Auth()->user()->cart->id; //function getCartIdAttribute() // user.php

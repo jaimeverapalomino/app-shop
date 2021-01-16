@@ -8,22 +8,20 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                 <div class="card card-signup">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>                        
+                @endif
                     <form class="form" method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="header header-primary text-center">
                             <h4>Registro</h4>
-                           <!-- <div class="social-line">
-                                <a href="#" class="btn btn-simple btn-just-icon">
-                                    <i class="fa fa-facebook-square"></i>
-                                </a>
-                                <a href="#" class="btn btn-simple btn-just-icon">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                                <a href="#" class="btn btn-simple btn-just-icon">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                            </div>-->
                         </div>
                         <p class="text-divider">Completa tus datos</p>
                         <div class="content">
@@ -37,23 +35,44 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon">
+                                    <i class="material-icons">fingerprint</i>
+                                </span>
+                                <input id="username" type="text" placeholder="Username" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
                                     <i class="material-icons">email</i>
                                 </span>
-                                <input id="email" type="email" placeholder="Correo" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" placeholder="Correo" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">phone</i>
+                                </span>
+                                <input id="phone" type="phone" placeholder="Teléfono" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">class</i>
+                                </span>
+                                <input id="address" type="text" placeholder="Dirección" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="material-icons">lock_outline</i>
                                 </span>
-                                <input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required>
                             </div>
 
                              <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="material-icons">lock_outline</i>
                                 </span>
-                                <input id="password-confirm" type="password" placeholder="Confirmar contraseña" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
+                                <input id="password-confirm" type="password" placeholder="Confirmar contraseña" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required>
                             </div>
                         </div>
                         <div class="footer text-center">

@@ -23,17 +23,24 @@
                 </div>
             @endif
 
-            <form method="post" action="{{ url('/admin/categories/'.$category->id.'/edit') }}">
+            <form method="post" action="{{ url('/admin/categories/'.$category->id.'/edit') }}"  enctype="multipart/form-data">
                 @csrf
-                <div class="=row">
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group label-floating">
                             <label class="control-label">Nombre de la categóría</label>
                             <input type="text" class="form-control" name="name" value="{{ old('name', $category->name) }}">
                         </div>
                     </div>
-
-                <div class="=row">
+                    <div class="col-sm-6">
+                        <label class="control-label">Imagen de la categoría</label>
+                        <input type="file" name="image">
+                        @if ($category->image)
+                            <p class="help-block">Subir solo si desea reemplazar la 
+                            <a href="{{ asset('images/categories/'.$category->image) }}" target="_blank">imagen actual</a>
+                            </p>
+                        @endif
+                    </div>
                     <div class="col-sm-12">                    
                         <div class="form-group label-floating">
                             <label class="control-label">Descripción de la categoría</label>
@@ -41,15 +48,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="=row">
-                    <div class="col-sm-6">                    
-                        <div class="form-group label-floating">
-                            <button class="btn btn-primary">Guardar cambios</button>
-                            <a class="btn btn-default" href=" {{ url('/admin/categories') }}">Cancelar</a>
-                        </div>
-                    </div>
-                </div>
 
+                <button class="btn btn-primary">Guardar cambios</button>
+                <a class="btn btn-default" href=" {{ url('/admin/categories') }}">Cancelar</a>
             </form>
         </div>
     </div>
