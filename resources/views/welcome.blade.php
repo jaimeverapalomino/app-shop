@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Bienvenido a App Shop')
+@section('title', 'Bienvenido a '. config('app.name'))
 
 @section('body-class', 'landing-page')
 
@@ -10,29 +10,68 @@
             margin-bottom: 1em;
         }
 
-    .row {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display:         flex;
-      flex-wrap: wrap;
+        .team .row {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display:         flex;
+            flex-wrap: wrap;
+        }
+
+        .team .row > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rounded {
+            height: 150px;
+            width: 150px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border-radius: 50%;
+            background-size:cover;
+        }
+
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     }
 
-    .row > [class*='col-'] {
-      display: flex;
-      flex-direction: column;
-    }
+        .tt-hint {
+            color: #999
+        }
 
-    .rounded {
-       height: 150px;
-       width: 150px;
-       -webkit-border-radius: 50%;
-       -moz-border-radius: 50%;
-       -ms-border-radius: 50%;
-       -o-border-radius: 50%;
-       border-radius: 50%;
-       background-size:cover;
-    }
+        .tt-menu {    /* used to be tt-dropdown-menu in older versions */
+            width: 222px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                    border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+                -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+                    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+        .tt-suggestion.tt-cursor,.tt-suggestion:hover {
+            color: #fff;
+            background-color: #0097cf;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
     </style>
 @endsection
 
@@ -41,7 +80,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1 class="title">Bienvenido a APP SHOP</h1>
+                <h1 class="title">Bienvenido a {{ config('app.name') }}</h1>
                 <h4>Pedidos en Linea.</h4>
                 <br />
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-danger btn-raised btn-lg">
@@ -97,8 +136,8 @@
 
         <div class="section text-center">
             <h2 class="title">Categorías Disponibles</h2>
-                <form>
-                    <input type="text" placeholder="Buscar producto" class="form-control">
+                <form class="form-inline" method="get" action="{{ url('/search') }}">
+                    <input type="text" placeholder="Buscar producto" class="form-control" name="query" id="search">
                     <button class="btn btn-primary btn-just-icon" type="submit">
                         <i class="material-icons">search</i>
                         
@@ -121,49 +160,36 @@
                 </div>
 
         </div>
-
-
-        <div class="section landing-section">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2 class="text-center title">Work with us</h2>
-                    <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-                    <form class="contact-form">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Your Name</label>
-                                    <input type="email" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Your Email</label>
-                                    <input type="email" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group label-floating">
-                            <label class="control-label">Your Messge</label>
-                            <textarea class="form-control" rows="4"></textarea>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-4 text-center">
-                                <button class="btn btn-primary btn-raised">
-                                    Send Message
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
     </div>
 
 </div>
 
 @include('includes.footer')
+@endsection
+
+@section('scritps')
+    <script src= "{{ asset('/js/typeahead.bundle.min.js') }}"></script>
+
+    <script>
+        $(function() {
+            // constructs the suggestion engine
+            var products = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: '{{ url("/products/json") }}'
+            });
+
+            //init typehead
+            $('#search').typeahead({
+                //propiedades
+                hint: true,
+                hight: true,
+                minLength: 1
+            }, {
+                //dataset
+                name: 'products',
+                source: products
+            });
+        });
+    </script>
 @endsection
